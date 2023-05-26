@@ -23,20 +23,25 @@ public class UpdateBalanceConsumer{
 
     @Transactional
     @RabbitListener(queues = {"#{mqConstants.bank_req}"})
-    public void consume(HashMap<String, String> message) {
-        HashMap<String, String> response = new HashMap<>(message);
+    public void consume(HashMap<String, Object> message) {
+        HashMap<String, Object> response = new HashMap<>(message);
         try{
-            Double amount = Double.parseDouble(message.get("amount"));
-            if(amount > 0){
-                bankService.increaseBalance(message.get("ccn"), amount);
-            }
-            else {
-                bankService.deductFromBalance(message.get("ccn"),-1*amount);
-                response.put("status", "SUCCESS");
-//                response.put("key", message.get("key"));
-                publisher.publish(mqConstants.bank_res, response);
-            }
+            Double amount = (Double) message.get("amount");
+            String command = (String) message.get("command");
+            switch (command){
+                case "INCREASE_BALANCE":
+                    bankService.increaseBalance((String) message.get("ccn"), amount);
+                    break;
 
+                case "DECREASE_BALANCE":
+                    bankService.deductFromBalance((String) message.get("ccn"),amount);
+                    response.put("status", "SUCCESS");
+                    publisher.publish(mqConstants.bank_res, response);
+                    break;
+
+                default:
+                    throw new Exception("Invalid command for Bank Service: "+ command);
+            }
         }
         catch (Exception e){
              response.put("status", e.getMessage());

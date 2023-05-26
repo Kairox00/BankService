@@ -17,6 +17,8 @@ public class InventoryService {
       @PersistenceContext
     private EntityManager entityManager;
 
+
+
      @Transactional
      public Inventory incInv(String productId, int quantity) throws Exception {
          Inventory inv = repository.findById(productId).orElse(null);

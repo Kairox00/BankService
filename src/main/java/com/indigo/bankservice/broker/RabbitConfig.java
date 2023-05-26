@@ -23,7 +23,7 @@ public class RabbitConfig {
     public Queue bank_res(){
         return new Queue(mqConstants.bank_res);
     }
-     @Bean
+    @Bean
     public Queue inv_req(){
         return new Queue(mqConstants.inv_req);
     }
@@ -31,6 +31,7 @@ public class RabbitConfig {
     public Queue inv_res(){
         return new Queue(mqConstants.inv_res);
     }
+
 
     @Bean
     public MessageConverter jsonMessageConverter() {

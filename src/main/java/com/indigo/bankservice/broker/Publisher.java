@@ -19,7 +19,7 @@ public class Publisher {
         rabbitTemplate.convertAndSend(queueName, message);
     }
 
-    public void publish(String queueName, HashMap<String, String> message) {
+    public void publish(String queueName, HashMap<String, Object> message) {
         rabbitTemplate.convertAndSend(queueName, message);
     }
 }

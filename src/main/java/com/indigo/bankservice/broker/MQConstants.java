@@ -18,4 +18,8 @@ public class MQConstants {
     @Value("${queue.inventory.res.name}")
     public String inv_res;
 
+
+
+
+
 }
