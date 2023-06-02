@@ -17,11 +17,13 @@ public class BankController {
         this.service = service;
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("")
     public List<BankAccount> findAll(){
         return service.findAll();
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{ccn}")
     public BankAccount findById(@PathVariable(value="ccn") String ccn){
         return service.findById(ccn);
@@ -33,6 +35,7 @@ public class BankController {
         service.save(account);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{ccn}")
     public BankAccount deductFromBalance(@PathVariable(value="ccn") String ccn, @RequestBody double amount){
         try {

@@ -15,7 +15,7 @@ public class RabbitConfig {
     public RabbitConfig(MQConstants mqConstants){
          this.mqConstants = mqConstants;
     }
- @Bean
+    @Bean
     public Queue bank_req(){
         return new Queue(mqConstants.bank_req);
     }
@@ -23,14 +23,15 @@ public class RabbitConfig {
     public Queue bank_res(){
         return new Queue(mqConstants.bank_res);
     }
-    @Bean
-    public Queue inv_req(){
-        return new Queue(mqConstants.inv_req);
-    }
-    @Bean
-    public Queue inv_res(){
-        return new Queue(mqConstants.inv_res);
-    }
+
+//    @Bean
+//    public Queue inv_req(){
+//        return new Queue(mqConstants.inv_req);
+//    }
+//    @Bean
+//    public Queue inv_res(){
+//        return new Queue(mqConstants.inv_res);
+//    }
 
 
     @Bean
